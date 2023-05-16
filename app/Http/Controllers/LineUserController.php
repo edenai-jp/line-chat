@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Models\LineUser;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class LineUserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -28,13 +28,20 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $lineUser = new LineUser;
+
+        $lineUser->line_user_name = $request->line_user_name;
+        $lineUser->line_id = $request->line_id;
+
+        $lineUser->save();
+
+        return response()->json(['message' => 'LineUser created successfully'], 200);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(User $user)
+    public function show(LineUser $lineUser)
     {
         //
     }
@@ -42,7 +49,7 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(User $user)
+    public function edit(LineUser $lineUser)
     {
         //
     }
@@ -50,7 +57,7 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, LineUser $lineUser)
     {
         //
     }
@@ -58,7 +65,7 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $user)
+    public function destroy(LineUser $lineUser)
     {
         //
     }
