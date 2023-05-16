@@ -30,12 +30,16 @@ class LineUserController extends Controller
     {
         $lineUser = new LineUser;
 
-        $lineUser->line_user_name = $request->line_user_name;
+        $lineUser->name = $request->line_user_name;
         $lineUser->line_id = $request->line_id;
+        $lineUser->token = $request->token;
 
         $lineUser->save();
 
-        return response()->json(['message' => 'LineUser created successfully'], 200);
+        return response()->json([
+            'error_no' => 0,
+            'message' => 'LineUser created successfully'
+        ], 200);
     }
 
     /**
