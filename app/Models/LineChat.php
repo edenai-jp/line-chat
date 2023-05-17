@@ -18,11 +18,16 @@ class LineChat extends Model
      */
     public static function getLatestRecords($lineId, $characterId)
     {
-        return self::where('line_id', $lineId)
+        $records = self::where('line_id', $lineId)
             ->where('character_id', $characterId)
             ->latest()
             ->select('question', 'answer')
             ->take(20)
             ->get();
+
+            $fmt = $records->mapWithKeys(function ($lineChat) {
+                return [$lineChat->question => $lineChat->answer];
+            })->toArray();
+            return $fmt;
     }
 }

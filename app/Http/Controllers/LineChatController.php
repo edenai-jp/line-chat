@@ -32,8 +32,8 @@ class LineChatController extends Controller
      */
     public function index(Request $request)
     {
-        $records = LineChat::getLatestRecords($request->line_id, $request->characterId);
-        if ($records->isEmpty()) {
+        $records = LineChat::getLatestRecords($request->line_id, $request->character_id);
+        if (empty($records)) {
             return response()->json([
                 'error_no' => 0,
                 'message' => '',
@@ -43,7 +43,7 @@ class LineChatController extends Controller
         return response()->json([
                 'error_no' => 0,
                 'message' => '',
-                'data' => $records->toArray()
+                'data' => $records
             ], 200);
     }
 
