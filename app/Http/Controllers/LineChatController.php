@@ -59,6 +59,14 @@ class LineChatController extends Controller
         // 使用 ChatGPT 服务
         $answer = $this->chatGPT->chat($question);
 
+        // 创建新的 LineChat 记录
+        LineChat::create([
+            'line_id' => $request->line_id,  // 这里需要替换成实际的 line_id
+            'character_id' => $characterId,  // 这里需要替换成实际的 character_id
+            'question' => $question,
+            'answer' => $answer,
+            'answer_by' => 'ChatGPT',
+        ]);
         // 返回响应
         return response()->json([
             'error_no' => 0,

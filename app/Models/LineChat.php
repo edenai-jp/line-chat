@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class LineChat extends Model
 {
     use HasFactory;
+    protected $guarded = [];
     /**
      * Get the latest 20 records where line_id and character_id match the given parameters.
      *
