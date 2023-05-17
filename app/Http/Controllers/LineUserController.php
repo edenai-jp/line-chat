@@ -28,13 +28,12 @@ class LineUserController extends Controller
      */
     public function store(Request $request)
     {
-        $lineUser = new LineUser;
-
-        $lineUser->name = $request->line_user_name;
-        $lineUser->line_id = $request->line_id;
-        $lineUser->token = $request->token;
-
-        $lineUser->save();
+        $data = [
+            'line_id' => $request->line_id,
+            'name' => $request->line_user_name,
+            'token' => $request->token,
+        ];
+        LineUser::firstOrCreate(['line_id' => $data['line_id']], $data);
 
         return response()->json([
             'error_no' => 0,
