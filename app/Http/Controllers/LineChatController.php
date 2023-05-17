@@ -3,10 +3,30 @@
 namespace App\Http\Controllers;
 
 use App\Models\LineChat;
+use App\Services\ChatGPT;
 use Illuminate\Http\Request;
 
 class LineChatController extends Controller
 {
+
+    /**
+     * The ChatGPT service instance.
+     *
+     * @var \App\Services\ChatGPT
+     */
+    protected $chatGPT;
+
+    /**
+     * Create a new controller instance.
+     *
+     * @param  \App\Services\ChatGPT  $chatGPT
+     * @return void
+     */
+    public function __construct(ChatGPT $chatGPT)
+    {
+        $this->chatGPT = $chatGPT;
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -30,9 +50,21 @@ class LineChatController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function chat(Request $request)
     {
-        //
+        // 获取输入的消息
+        $question = $request->question;
+        $characterId = $request->character_id;
+
+        // 使用 ChatGPT 服务
+        $answer = $this->chatGPT->chat($question);
+
+        // 返回响应
+        return response()->json([
+            'error_no' => 0,
+            'message' => '',
+            'data' => $answer
+        ], 200);
     }
 
     /**
