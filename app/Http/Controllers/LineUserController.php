@@ -37,7 +37,8 @@ class LineUserController extends Controller
 
         return response()->json([
             'error_no' => 0,
-            'message' => 'LineUser created successfully'
+            'message' => 'LineUser created successfully',
+            'data' => []
         ], 200);
     }
 
