@@ -14,12 +14,14 @@ return new class extends Migration
         Schema::create('line_chats', function (Blueprint $table) {
             $table->id();
             $table->string('line_id');
+            $table->string('character_id');
             $table->string('answer_by');
             $table->text('question');
             $table->text('answer');
             $table->softDeletes();
             $table->timestamps();
-            $table->index('line_id');
+            $table->index(['line_id', 'created_at']);
+            $table->index('character_id');
             $table->index('answer_by');
         });
     }
