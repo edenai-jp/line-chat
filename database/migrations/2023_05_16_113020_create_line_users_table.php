@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('line_id');
-            $table->string('token');
+            $table->text('token');
             $table->timestamps();
             $table->softDeletes();
         });

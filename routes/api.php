@@ -18,5 +18,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::post('/store', 'App\Http\Controllers\LineUserController@store');
+Route::post('/home', 'App\Http\Controllers\LineUserController@index');
 Route::post('/init', 'App\Http\Controllers\LineChatController@index');
 Route::post('/chat', 'App\Http\Controllers\LineChatController@chat');

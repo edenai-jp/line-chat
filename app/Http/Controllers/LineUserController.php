@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Character;
 use App\Models\LineUser;
+use App\Models\Topic;
 use Illuminate\Http\Request;
 
 class LineUserController extends Controller
@@ -10,9 +12,16 @@ class LineUserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        return response()->json([
+            'error_no' => 0,
+            'message'  => '',
+            'data'     => [
+                "characters" => Character::select('name', 'avatar', 'intro')->get(),
+                "topics"     => Topic::select('title', 'avatar', 'intro')->get(),
+            ],
+        ], 200);
     }
 
     /**
@@ -30,15 +39,15 @@ class LineUserController extends Controller
     {
         $data = [
             'line_id' => $request->line_id,
-            'name' => $request->line_user_name,
-            'token' => $request->token,
+            'name'    => $request->line_user_name,
+            'token'   => $request->token,
         ];
         LineUser::firstOrCreate(['line_id' => $data['line_id']], $data);
 
         return response()->json([
             'error_no' => 0,
-            'message' => 'LineUser created successfully',
-            'data' => []
+            'message'  => 'LineUser created successfully',
+            'data'     => [],
         ], 200);
     }
 

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Services;
+
 use OpenAI;
 
 class ChatGPT
@@ -14,10 +15,10 @@ class ChatGPT
     public function chat(string $message): string
     {
         $openaiApiKey = getenv('OPENAI_API_KEY');
-        $client = OpenAI::client($openaiApiKey);
+        $client       = OpenAI::client($openaiApiKey);
 
         $response = $client->chat()->create([
-            'model' => 'gpt-3.5-turbo',
+            'model'    => 'gpt-3.5-turbo',
             'messages' => [
                 ['role' => 'user', 'content' => $message],
             ],

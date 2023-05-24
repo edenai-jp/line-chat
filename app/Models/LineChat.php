@@ -23,11 +23,19 @@ class LineChat extends Model
             ->latest()
             ->select('question', 'answer')
             ->take(20)
-            ->get();
+            ->get()
+            ->map(function ($record) {
+                return [
+                    'question' => $record->question,
+                    'answer' => $record->answer
+                ];
+            })
+            ->toArray();
 
-            $fmt = $records->mapWithKeys(function ($lineChat) {
-                return [$lineChat->question => $lineChat->answer];
-            })->toArray();
-            return $fmt;
+        $formatted = array_reverse($records, true);
+        $formatted = array_values($formatted);
+
+        return $formatted;
     }
+
 }
